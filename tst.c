@@ -30,18 +30,10 @@ while(1) {
 //XDrawArc(dis, win, gc, 490 + dot.x, 490 + dot.y, 20, 20, 0, 23040);
 XDrawPoint(dis, win, gc, 500 + dot.x, 500 + dot.y); 
 usleep(100);
-switch(rand()%4) {
 
-case 0 : ++dot.x;
-break;
-case 1 : --dot.x;
-break;
-case 2 : ++dot.y;
-break;
-case 3 : --dot.y;
-break;
-default : break;
-}
+dot.x += rand()%3-1;
+dot.y += rand()%3-1;
+
 printf("dot.x is %d key!\n", dot.x);
 printf("dot.y is %d key!\n", dot.y);
 XFlush(dis);
