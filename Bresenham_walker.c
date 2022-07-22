@@ -26,7 +26,6 @@ void drawLow();
 
 void init();
 void quit();
-void draw();
 int main() {
 
 init();
@@ -39,7 +38,7 @@ while(1) {
 //XDrawLine(dis, win, gc, 500, 500, 300, 300);
 //XDrawArc(dis, win, gc, 490 + dot.x, 490 + dot.y, 20, 20, 0, 23040);
 
-usleep(10000);
+usleep(100);
 
 XCheckWindowEvent(dis,win,PointerMotionMask | KeyPressMask,&event);
 XFlush(dis);
@@ -57,7 +56,7 @@ if(event.type == MotionNotify){
     
     
     
-    if(posx != event.xbutton.x || posy != event.xbutton.y){
+    if(posx != event.xbutton.x || posy != event.xbutton.y || posx == dot.x || posy == dot.y){
     posx = event.xbutton.x;
     posy = event.xbutton.y;
     
@@ -107,8 +106,8 @@ if(event.type == MotionNotify){
 }
 
 void init() {
-dot.x = 0;
-dot.y = 0;
+dot.x = 500;
+dot.y = 500;
 posx = 0;
 posy = 0;
 dis = XOpenDisplay(NULL);
@@ -143,7 +142,7 @@ D = 2 * dy - dx;
     
 }
 
-void drawLow(int directon){
+void drawLow(int direction){
 
 XDrawPoint(dis, win, gc, dot.x, dot.y);
     
@@ -153,7 +152,7 @@ D += 2 * (dy - dx);
 }else {
 D += 2 * dy;
 }
-dot.x += directon;
+dot.x += direction;
 }
 
 void initHigh(int x0, int y0, int x1, int y1){
